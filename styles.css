@@ -1,0 +1,68 @@
+/* --------------- GLOBAL --------------- */
+
+
+
+
+/* --------------- HEADING --------------- */
+
+h1 {
+  text-align: center;
+  color: rebeccapurple;
+}
+
+
+/* --------------- QUESTIONS --------------- */
+
+#question {
+  margin: 10px auto;
+  width: 70%;
+  padding: 30px;
+  border: 3px solid blue;
+}
+
+
+/* --------------- ANSWERS --------------- */
+
+#answer {
+  width: 50%;
+  margin: 10px auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#answer ul {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+#answer ul li {
+  width: 40%;
+  height: 40px;
+  color: white;
+  background-color: black;
+  padding-top: 10px;
+  margin: 5px;
+  text-align: center;
+  display: inline-block;
+  font-weight: bolder;
+}
+
+
+/* --------------- SCOREBOARD --------------- */
+
+#scores {
+  display: flex;
+  width: 70%;
+  background-color: darkslateblue;
+  justify-content: center;
+  margin: 10px auto;
+}
+
+#player1, #player2 {
+  
+}
