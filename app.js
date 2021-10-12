@@ -13,6 +13,7 @@ const state = {
 }
 
 let questions = [];
+const winScore = 2;
 
 
 //////////////////////////////
@@ -69,23 +70,52 @@ const setBoard = q => {
   $p1Score.text(state.player1);
   $p2Score.text(state.player2);
 
-  $("li").off();
-  $("li").on("click", e => {
-    chooseAnswer(e, randomQuestion);
-  });
+  // if a player hasn't won yet...
+  if (state.player1 < winScore && state.player2 < winScore) {
+    $("li").off();
+    $("li").on("click", e => {
+      chooseAnswer(e, randomQuestion);
+    });
+  } else {
+    if (state.player1 === winScore) {
+    $("li").off();
+    $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
+    } else {
+      $("li").off();
+      $("body").append($("<h1>").attr("id", "winning-player").text("Player 2 wins!"));
+    }
+    boardReset(q);
+  }
+}
+
+// reset the board and start the game over
+const boardReset = (q) => {
+  const $resetText = $("<h2>Play again?</h2>");
+  const $resetDiv = $("<div id='reset'>").append($resetText);
+  $("body").append($resetDiv);
+
+
+
+  $resetText.on("click", function(e) {
+    state.player1 = 0;
+    state.player2 = 0;
+    state.player1Turn = true;
+    setBoard(q);
+    this.remove();
+    $("#winning-player").remove();
+  })
 }
 
 
-// randomize answers per question function
-
+// DONE: create a win condition for a player
+// DONE: create a reset button once win condition is reached
+// make it so questions only show once per game (array.pop on the array of questions)
+// maybe: randomize answers per question
+// put in a countdown timer for each question
 
 //////////////////////////////
 // MAIN APP LOGIC
 //////////////////////////////
-
-
-
-
 
 
 const URL = "https://cdn.contentful.com/spaces/fho9ut5q5jt4/environments/master/entries?access_token=AJoEH4OEk9QKtT_Je2t2k6G3CJM4_1v8vs4M71O1MfA&content_type=triviaq";
@@ -93,7 +123,6 @@ const URL = "https://cdn.contentful.com/spaces/fho9ut5q5jt4/environments/master/
 $.ajax(URL)
   .then(data => {
     questions = data.items.map(q => q.fields);
-    // console.log(questions);
-    // console.log(data.items[0].fields);
+
     setBoard(questions);
   })
