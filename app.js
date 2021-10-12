@@ -10,9 +10,12 @@ const state = {
   player1: 0,
   player2: 0,
   player1Turn: true,
+  questionNumber: 0,
 }
 
 let questions = [];
+let questionsCopy = [];
+let maxQuestions = 0;
 const winScore = 2;
 
 
@@ -28,17 +31,18 @@ const $d = $("#d");
 const $p1Score = $("#player1 h4");
 const $p2Score = $("#player2 h4");
 
-// console.log(p1Score, p2Score)
-
 
 //////////////////////////////
 // FUNCIONS
 //////////////////////////////
 
 const chooseAnswer = (e, question) => {
-  // console.log(e);
+
+  // to-do: fix the current player class toggling
+  $("#player1").toggleClass("current-turn");
+  $("#player2").toggleClass("current-turn");
+
   if (e.target.innerText === question.answer) {
-    console.log("correct answer", state.player1Turn);
     if (state.player1Turn) {
       state.player1++;
       state.player1Turn = !state.player1Turn;
@@ -48,16 +52,27 @@ const chooseAnswer = (e, question) => {
     }
     setBoard(questions);
   } else {
-    console.log("incorrect", state.player1Turn);
     setBoard(questions);
     state.player1Turn = !state.player1Turn;
   }
 }
 
+
 const setBoard = q => {
   // Get a random index with a random question
   const randomIndex = Math.floor(Math.random() * q.length);
   const randomQuestion = q[randomIndex];
+  state.questionNumber++;
+  if (state.questionNumber === 1) {
+    $("#player1").toggleClass("current-turn");
+  }
+
+  // to-do: prepend "Question # X" to id="question"
+
+
+  // to-do: here, make it point to a GAMEOVER function if nobody wins and state.questionNumber > maxQuestions
+  q.splice(randomIndex, 1);
+  console.log(state.questionNumber, maxQuestions);
 
   // Update the question
   $question.text(randomQuestion.question);
@@ -66,7 +81,7 @@ const setBoard = q => {
   $c.text(randomQuestion.c);
   $d.text(randomQuestion.d);
 
-  //Update the players' scores
+  // Update the players' scores
   $p1Score.text(state.player1);
   $p2Score.text(state.player2);
 
@@ -78,8 +93,8 @@ const setBoard = q => {
     });
   } else {
     if (state.player1 === winScore) {
-    $("li").off();
-    $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
+      $("li").off();
+      $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
     } else {
       $("li").off();
       $("body").append($("<h1>").attr("id", "winning-player").text("Player 2 wins!"));
@@ -88,30 +103,42 @@ const setBoard = q => {
   }
 }
 
+
 // reset the board and start the game over
 const boardReset = (q) => {
   const $resetText = $("<h2>Play again?</h2>");
   const $resetDiv = $("<div id='reset'>").append($resetText);
   $("body").append($resetDiv);
-
-
+  $("#player1").removeClass("current-turn");
+  $("#player2").removeClass("current-turn");
 
   $resetText.on("click", function(e) {
     state.player1 = 0;
     state.player2 = 0;
     state.player1Turn = true;
-    setBoard(q);
-    this.remove();
+    state.questionNumber = 0;
+
     $("#winning-player").remove();
+
+    // need to grab the original list of questions and set to new questions
+    questions = [...questionsCopy];
+    this.remove();
+    setBoard(q);
   })
 }
 
 
+// To-do list
+///////////////
 // DONE: create a win condition for a player
 // DONE: create a reset button once win condition is reached
-// make it so questions only show once per game (array.pop on the array of questions)
+// style for mobile
+// DONE: highlight each player's score when it's their turn
+// DONE: make it so questions only show once per game (array.pop on the array of questions)
 // maybe: randomize answers per question
 // put in a countdown timer for each question
+// put in a modal after each question is answered: https://jquerymodal.com/
+
 
 //////////////////////////////
 // MAIN APP LOGIC
@@ -123,6 +150,7 @@ const URL = "https://cdn.contentful.com/spaces/fho9ut5q5jt4/environments/master/
 $.ajax(URL)
   .then(data => {
     questions = data.items.map(q => q.fields);
-
+    maxQuestions = questions.length;
+    questionsCopy = [...questions];
     setBoard(questions);
   })

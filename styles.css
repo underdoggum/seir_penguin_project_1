@@ -14,7 +14,7 @@
 h1 {
   text-align: center;
   color: rebeccapurple;
-  padding: 20px;
+  padding: 10px;
 }
 
 
@@ -28,8 +28,6 @@ h1 {
   border: 3px solid blue;
   border-radius: 20px;
 }
-
-
 
 
 /* --------------- ANSWERS --------------- */
@@ -51,15 +49,20 @@ h1 {
   list-style: none;
 }
 
+/* to-do: make a mobile-friendly version of answers here */
+
+
 #answer ul li {
   width: 40%;
   height: 60px;
   color: white;
   background-color: rgb(51, 51, 51);
-  padding-top: 10px;
+  padding: 5px;
   margin: 5px;
   text-align: center;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 20px;
 }
 
@@ -72,16 +75,22 @@ h1 {
 
 /* --------------- SCOREBOARD --------------- */
 
+
+/* to-do: make a mobile-friendly version of scores here */
+
 #scores {
   display: flex;
-  width: 70%;
-  background-color: darkslateblue;
+  width: fit-content;
+  background-color: rgba(71, 61, 139, 0.4);
   justify-content: center;
   margin: 10px auto;
+  border-radius: 25px;
+
 }
 
 #player1, #player2 {
-  width: 40%;
+  color: white;
+  width: 200px;
   margin: 5px;
   text-align: center;
 }
@@ -95,3 +104,11 @@ h1 {
 #reset h2:hover {
   cursor: pointer;
 }
+
+.current-turn {
+  border: 2px solid white;
+  border-radius: 20px;
+  background-color: rgba(71, 61, 139, 0.75);
+  transition:  border 0.3s ease-in-out, background-color 0.5s ease-in-out;
+}
+
