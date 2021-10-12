@@ -52,6 +52,10 @@ h1 {
   font-weight: bolder;
 }
 
+#answer ul li:hover {
+  cursor: pointer;
+}
+
 
 /* --------------- SCOREBOARD --------------- */
 
@@ -64,5 +68,7 @@ h1 {
 }
 
 #player1, #player2 {
-  
+  width: 40%;
+  margin: 5px;
+  text-align: center;
 }
