@@ -133,6 +133,7 @@ const boardReset = (q) => {
 
 
 const gameOver = (q) => {
+  confetti();
   $("li").off();
   const $h2 = $("<h2>").addClass("gameover").css("text-align", "center");
 
