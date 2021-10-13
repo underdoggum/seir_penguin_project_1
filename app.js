@@ -68,16 +68,14 @@ const setBoard = q => {
   }
   // to-do: prepend "Question # X" to id="question"
 
-  // to-do: here, make it point to a GAMEOVER function if nobody wins and state.questionNumber > maxQuestions
   // if nobody wins and questions are over, game is over
   if (state.questionNumber > maxQuestions) {
     gameOver(q);
   } else {
     q.splice(randomIndex, 1);
-    console.log(state.questionNumber, maxQuestions);
 
     // Update the question
-    $question.text(randomQuestion.question);
+    $question.text(`Question ${state.questionNumber} of ${maxQuestions}: ${randomQuestion.question}`);
     $a.text(randomQuestion.a);
     $b.text(randomQuestion.b);
     $c.text(randomQuestion.c);
@@ -137,9 +135,9 @@ const gameOver = (q) => {
   const $h2 = $("<h2>").addClass("gameover").css("text-align", "center");
 
   if (state.player1 > state.player2) {
-    $h2.text("Player 1 wins!");
+    $h2.text("PLAYER 1 WINS!");
   } else if (state.player2 > state.player1) {
-    $h2.text("Player 2 wins!");
+    $h2.text("PLAYER 2 WINS!");
   } else {
     $h2.text("It's a draw!");
   }
