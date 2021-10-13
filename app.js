@@ -66,40 +66,43 @@ const setBoard = q => {
   if (state.questionNumber === 1) {
     $("#player1").toggleClass("current-turn");
   }
-
   // to-do: prepend "Question # X" to id="question"
 
-
   // to-do: here, make it point to a GAMEOVER function if nobody wins and state.questionNumber > maxQuestions
-  q.splice(randomIndex, 1);
-  console.log(state.questionNumber, maxQuestions);
-
-  // Update the question
-  $question.text(randomQuestion.question);
-  $a.text(randomQuestion.a);
-  $b.text(randomQuestion.b);
-  $c.text(randomQuestion.c);
-  $d.text(randomQuestion.d);
-
-  // Update the players' scores
-  $p1Score.text(state.player1);
-  $p2Score.text(state.player2);
-
-  // if a player hasn't won yet...
-  if (state.player1 < winScore && state.player2 < winScore) {
-    $("li").off();
-    $("li").on("click", e => {
-      chooseAnswer(e, randomQuestion);
-    });
+  // if nobody wins and questions are over, game is over
+  if (state.questionNumber > maxQuestions) {
+    gameOver(q);
   } else {
-    if (state.player1 === winScore) {
+    q.splice(randomIndex, 1);
+    console.log(state.questionNumber, maxQuestions);
+
+    // Update the question
+    $question.text(randomQuestion.question);
+    $a.text(randomQuestion.a);
+    $b.text(randomQuestion.b);
+    $c.text(randomQuestion.c);
+    $d.text(randomQuestion.d);
+
+    // Update the players' scores
+    $p1Score.text(state.player1);
+    $p2Score.text(state.player2);
+
+    // if a player hasn't won yet...
+    if (state.player1 < winScore && state.player2 < winScore) {
       $("li").off();
-      $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
+      $("li").on("click", e => {
+        chooseAnswer(e, randomQuestion);
+      });
     } else {
-      $("li").off();
-      $("body").append($("<h1>").attr("id", "winning-player").text("Player 2 wins!"));
+      if (state.player1 === winScore) {
+        $("li").off();
+        $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
+      } else {
+        $("li").off();
+        $("body").append($("<h1>").attr("id", "winning-player").text("Player 2 wins!"));
+      }
+      boardReset(q);
     }
-    boardReset(q);
   }
 }
 
@@ -112,7 +115,7 @@ const boardReset = (q) => {
   $("#player1").removeClass("current-turn");
   $("#player2").removeClass("current-turn");
 
-  $resetText.on("click", function(e) {
+  $resetText.on("click", () => {
     state.player1 = 0;
     state.player2 = 0;
     state.player1Turn = true;
@@ -120,11 +123,33 @@ const boardReset = (q) => {
 
     $("#winning-player").remove();
 
-    // need to grab the original list of questions and set to new questions
+    // need to copy the original list of questions array to start the game over
     questions = [...questionsCopy];
-    this.remove();
-    setBoard(q);
+    $resetDiv.remove();
+    $(".gameover").remove();
+    setBoard(questions);
   })
+}
+
+
+const gameOver = (q) => {
+  $("li").off();
+  const $h2 = $("<h2>").addClass("gameover").css("text-align", "center");
+
+  if (state.player1 > state.player2) {
+    $h2.text("Player 1 wins!");
+  } else if (state.player2 > state.player1) {
+    $h2.text("Player 2 wins!");
+  } else {
+    $h2.text("It's a draw!");
+  }
+
+  const $h1 = $("<h1>").addClass("gameover").text("GAME OVER").css({
+    "color": "red",
+    "text-align": "center",
+  });
+  $("body").append($h1).append($h2);
+  boardReset(questions);
 }
 
 
