@@ -37,7 +37,6 @@ const $p2Score = $("#player2 h4");
 //////////////////////////////
 
 const chooseAnswer = (e, question) => {
-
   // to-do: fix the current player class toggling
   $("#player1").toggleClass("current-turn");
   $("#player2").toggleClass("current-turn");
@@ -158,9 +157,36 @@ const gameOver = (q) => {
 // style for mobile
 // DONE: highlight each player's score when it's their turn
 // DONE: make it so questions only show once per game (array.pop on the array of questions)
-// maybe: randomize answers per question
 // put in a countdown timer for each question
 // put in a modal after each question is answered: https://jquerymodal.com/
+
+
+
+//////////////////////////////
+// THREE JS
+//////////////////////////////
+
+// const scene = new THREE.Scene();
+// const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+// const renderer = new THREE.WebGLRenderer();
+// renderer.setSize( window.innerWidth, window.innerHeight );
+// document.body.appendChild( renderer.domElement );
+// const geometry = new THREE.BoxGeometry();
+// const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+// const cube = new THREE.Mesh( geometry, material );
+// scene.add( cube );
+
+// camera.position.z = 5;
+// function animate() {
+// 	requestAnimationFrame( animate );
+
+//   // moving goes below
+//   cube.rotation.x += 0.01;
+// 	cube.rotation.y += 0.01;
+
+// 	renderer.render( scene, camera );
+// }
 
 
 //////////////////////////////
