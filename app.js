@@ -95,12 +95,10 @@ const setBoard = q => {
         $("li").off();
         $("#player1").addClass("winner");
         $("#player1 h3").text("Player 1 wins!");
-        // $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
       } else {
         $("li").off();
         $("#player2").addClass("winner");
         $("#player2 h3").text("Player 2 wins!");
-        // $("body").append($("<h1>").attr("id", "winning-player").text("Player 2 wins!"));
       }
       boardReset(q);
     }
@@ -109,20 +107,25 @@ const setBoard = q => {
 
 
 // reset the board and start the game over
-const boardReset = (q) => {
+const boardReset = q => {
   const $resetText = $("<h2>Play again?</h2>");
   const $resetDiv = $("<div id='reset'>").append($resetText);
   $("body").append($resetDiv);
   $("#player1").removeClass("current-turn");
   $("#player2").removeClass("current-turn");
 
+  // reset to all default game values
   $resetText.on("click", () => {
     state.player1 = 0;
     state.player2 = 0;
     state.player1Turn = true;
     state.questionNumber = 0;
 
-    $("#player1, #player2").removeClass("winner");
+    $("#player1").removeClass("winner");
+    $("#player2").removeClass("winner");
+    $("#player1 h3").text("Player 1");
+    $("#player2 h3").text("Player 2");
+
 
     // need to copy the original list of questions array to start the game over
     questions = [...questionsCopy];
@@ -133,21 +136,28 @@ const boardReset = (q) => {
 }
 
 
-const gameOver = (q) => {
+const gameOver = q => {
   $("li").off();
-  const $h2 = $("<h2>").addClass("gameover").css("text-align", "center");
+  const $h2 = $("<h2>").addClass("gameover").css({
+    "margin": "auto",
+    "background": "white",
+    "width": "fit-content",
+  });
 
   if (state.player1 > state.player2) {
-    $h2.text("PLAYER 1 WINS!");
+    $("#player1 h3").text("Player 1 WINS!")
+    $("#player1").addClass("winner");
   } else if (state.player2 > state.player1) {
-    $h2.text("PLAYER 2 WINS!");
+    $("#player2 h3").text("Player 2 WINS!");
+    $("#player2").addClass("winner");
   } else {
     $h2.text("It's a draw!");
   }
 
   const $h1 = $("<h1>").addClass("gameover").text("GAME OVER").css({
     "color": "red",
-    "text-align": "center",
+    "width": "fit-content",
+    "margin": "5px auto",
   });
   $("body").append($h1).append($h2);
   boardReset(questions);
