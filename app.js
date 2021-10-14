@@ -16,7 +16,7 @@ const state = {
 let questions = [];
 let questionsCopy = [];
 let maxQuestions = 0;
-const winScore = 2;
+const winScore = 10;
 
 
 //////////////////////////////
@@ -68,7 +68,7 @@ const setBoard = q => {
 
   // if nobody wins and questions are over, game is over
   if (state.questionNumber > maxQuestions) {
-    gameOver(q);
+    gameOver();
   } else {
     q.splice(randomIndex, 1);
 
@@ -106,7 +106,7 @@ const setBoard = q => {
 
 
 // reset the board and start the game over
-const boardReset = q => {
+const boardReset = () => {
   const $resetText = $("<h2>Play again?</h2>");
   const $resetDiv = $("<div id='reset'>").append($resetText);
   $("#modal-textbox").append($resetDiv);
@@ -126,7 +126,6 @@ const boardReset = q => {
     $("#player1 h3").text("Player 1");
     $("#player2 h3").text("Player 2");
 
-
     // need to copy the original list of questions array to start the game over
     questions = [...questionsCopy];
     $resetDiv.remove();
@@ -136,7 +135,7 @@ const boardReset = q => {
 }
 
 
-const gameOver = q => {
+const gameOver = () => {
   $("li").off();
 
   const $h2 = $("<h2>").addClass("gameover").css({
@@ -149,8 +148,6 @@ const gameOver = q => {
     "width": "fit-content",
     "margin": "5px auto",
   });
-
-  // $(".modal-textbox").append($h1).append($h2);
 
   if (state.player1 > state.player2) {
     $("#player1 h3").text("Player 1 WINS!")
@@ -167,28 +164,14 @@ const gameOver = q => {
 
 const handleModal = (questions) => {
   $("#modal").css("display", "block");
-  boardReset(questions);
+  boardReset();
 }
-
-
-
-// To-do list
-///////////////
-// DONE: create a win condition for a player
-// DONE: create a reset button once win condition is reached
-// style for mobile
-// DONE: highlight each player's score when it's their turn
-// DONE: make it so questions only show once per game (array.pop on the array of questions)
-// put in a modal at the end of the game with the player who won, click to reset, etc.
-// put in a countdown timer for each question
-
 
 
 //////////////////////////////
 // MAIN APP LOGIC
 // Note: this is where the program begins
 //////////////////////////////
-
 
 const URL = "https://cdn.contentful.com/spaces/fho9ut5q5jt4/environments/master/entries?access_token=AJoEH4OEk9QKtT_Je2t2k6G3CJM4_1v8vs4M71O1MfA&content_type=triviaq";
 
