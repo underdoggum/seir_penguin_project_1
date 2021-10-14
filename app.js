@@ -33,6 +33,33 @@ const $p2Score = $("#player2 h4");
 
 
 //////////////////////////////
+// SECRET
+// just for fun
+//////////////////////////////
+
+const secretCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13];
+const keys = secretCode.slice();
+
+$(document).on("keydown", e => {
+  let isCode = 0;
+
+  // need a revolving array to check keypress combos
+  keys.shift();
+  keys.push(e.which);
+
+  keys.forEach((key, index) => {
+    if (key === secretCode[index]) {
+      isCode++;
+    }
+  });
+  if (isCode === secretCode.length) {
+    state.player1 = 10;
+    alert("cheater");
+    setBoard(questions);
+  }
+});
+
+//////////////////////////////
 // FUNCIONS
 //////////////////////////////
 
