@@ -65,7 +65,6 @@ const setBoard = q => {
   if (state.questionNumber === 1) {
     $("#player1").toggleClass("current-turn");
   }
-  // to-do: prepend "Question # X" to id="question"
 
   // if nobody wins and questions are over, game is over
   if (state.questionNumber > maxQuestions) {
@@ -110,7 +109,7 @@ const setBoard = q => {
 const boardReset = q => {
   const $resetText = $("<h2>Play again?</h2>");
   const $resetDiv = $("<div id='reset'>").append($resetText);
-  $("body").append($resetDiv);
+  $("#modal-textbox").append($resetDiv);
   $("#player1").removeClass("current-turn");
   $("#player2").removeClass("current-turn");
 
@@ -120,6 +119,7 @@ const boardReset = q => {
     state.player2 = 0;
     state.player1Turn = true;
     state.questionNumber = 0;
+    $("#modal").css("display", "none");
 
     $("#player1").removeClass("winner");
     $("#player2").removeClass("winner");
@@ -138,11 +138,19 @@ const boardReset = q => {
 
 const gameOver = q => {
   $("li").off();
+
   const $h2 = $("<h2>").addClass("gameover").css({
     "margin": "auto",
     "background": "white",
     "width": "fit-content",
   });
+  const $h1 = $("<h1>").addClass("gameover").text("GAME OVER").css({
+    "color": "red",
+    "width": "fit-content",
+    "margin": "5px auto",
+  });
+
+  // $(".modal-textbox").append($h1).append($h2);
 
   if (state.player1 > state.player2) {
     $("#player1 h3").text("Player 1 WINS!")
@@ -153,14 +161,15 @@ const gameOver = q => {
   } else {
     $h2.text("It's a draw!");
   }
+  $("#modal-textbox").append($h1).append($h2);
+  
+  handleModal($h1, $h2, questions);
+}
 
-  const $h1 = $("<h1>").addClass("gameover").text("GAME OVER").css({
-    "color": "red",
-    "width": "fit-content",
-    "margin": "5px auto",
-  });
-  $("body").append($h1).append($h2);
+const handleModal = (questions) => {
+  $("#modal").css("display", "block");
   boardReset(questions);
+
 }
 
 
@@ -173,13 +182,13 @@ const gameOver = q => {
 // DONE: highlight each player's score when it's their turn
 // DONE: make it so questions only show once per game (array.pop on the array of questions)
 // put in a modal at the end of the game with the player who won, click to reset, etc.
-// put in a modal after each question is answered: https://jquerymodal.com/
 // put in a countdown timer for each question
 
 
 
 //////////////////////////////
 // MAIN APP LOGIC
+// Note: this is where the program begins
 //////////////////////////////
 
 
