@@ -93,10 +93,14 @@ const setBoard = q => {
     } else {
       if (state.player1 === winScore) {
         $("li").off();
-        $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
+        $("#player1").addClass("winner");
+        $("#player1 h3").text("Player 1 wins!");
+        // $("body").append($("<h1>").attr("id", "winning-player").text("Player 1 wins!"));
       } else {
         $("li").off();
-        $("body").append($("<h1>").attr("id", "winning-player").text("Player 2 wins!"));
+        $("#player2").addClass("winner");
+        $("#player2 h3").text("Player 2 wins!");
+        // $("body").append($("<h1>").attr("id", "winning-player").text("Player 2 wins!"));
       }
       boardReset(q);
     }
@@ -118,7 +122,7 @@ const boardReset = (q) => {
     state.player1Turn = true;
     state.questionNumber = 0;
 
-    $("#winning-player").remove();
+    $("#player1, #player2").removeClass("winner");
 
     // need to copy the original list of questions array to start the game over
     questions = [...questionsCopy];
@@ -150,6 +154,7 @@ const gameOver = (q) => {
 }
 
 
+
 // To-do list
 ///////////////
 // DONE: create a win condition for a player
@@ -157,36 +162,10 @@ const gameOver = (q) => {
 // style for mobile
 // DONE: highlight each player's score when it's their turn
 // DONE: make it so questions only show once per game (array.pop on the array of questions)
-// put in a countdown timer for each question
+// put in a modal at the end of the game with the player who won, click to reset, etc.
 // put in a modal after each question is answered: https://jquerymodal.com/
+// put in a countdown timer for each question
 
-
-
-//////////////////////////////
-// THREE JS
-//////////////////////////////
-
-// const scene = new THREE.Scene();
-// const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-// const renderer = new THREE.WebGLRenderer();
-// renderer.setSize( window.innerWidth, window.innerHeight );
-// document.body.appendChild( renderer.domElement );
-// const geometry = new THREE.BoxGeometry();
-// const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-// const cube = new THREE.Mesh( geometry, material );
-// scene.add( cube );
-
-// camera.position.z = 5;
-// function animate() {
-// 	requestAnimationFrame( animate );
-
-//   // moving goes below
-//   cube.rotation.x += 0.01;
-// 	cube.rotation.y += 0.01;
-
-// 	renderer.render( scene, camera );
-// }
 
 
 //////////////////////////////
