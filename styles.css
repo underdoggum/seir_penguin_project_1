@@ -23,15 +23,17 @@ body {
 
   ul {
     height: 100px;
+
   }
 
 
   #a, #b, #c, #d {
+    justify-content: center;
     height: 20px !important;
   }
 
   body {
-    height: 100vh;
+    height: 90vh;
   }
   .container {
     height: 100%;
@@ -39,6 +41,7 @@ body {
   #answer {
     height: 40vh !important;
     padding-top: 0;
+    margin-top: 20px;
   }
 }
 

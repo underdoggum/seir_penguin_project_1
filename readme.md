@@ -7,9 +7,7 @@ Welcome to my first full-fledged web development project!\
 \
 [See working site here!](https://seir-penguin-project-1-roan.vercel.app)\
 \
-This JavaScript-based turn-taking trivia game allows players to compete in the Science trivia category with randomized questions and shows players scores as they play throughout the game.\
-\
-This is the first project administered in General Assembly's Software Engineering Immersive bootcamp, which uses the Front-End web development technologies listed below.
+This JavaScript-based, 2-player, turn-taking trivia game allows players to compete in the Science trivia category with randomized questions and shows players scores as they play throughout the game.
 
 
 ## Technologies Used
@@ -19,8 +17,8 @@ This is the first project administered in General Assembly's Software Engineerin
  - JavaScript ES6
 
  #### Libraries / Techniques
- - jQuery
- - Mobile-first
+ - jQuery / AJAX
+ - Mobile-first responsive styling
  - CSS Animations
  - Deployed with Vercel
  - Using Contentful as the headless CMS for the backend
@@ -45,13 +43,22 @@ This is the first project administered in General Assembly's Software Engineerin
 
 #### Day 1:
  - Finished Minimum Viable Product of the game
- - Added some desktop styling
+ - Added some desktop styling as well as styling for specific mobile devices that give trouble (looking at you, iPhone 5)
+
+ #### Day 2:
+ - This was a fun day, full of building CSS animations, like hovering over an answer button for a 3d effect and making the winning player score twist about in a victory dance.
+
+ #### Day 3:
+ - Fully functioning modal implemented at end of the game, appending the "game over" notification and reset button
+ - Cleaning up code as much as possible to simplify future devs reading this
 
 
 ## Challenges
 #### I had trouble with...
+- Noticing code that needs improvement, then noticing something else that should be improved, etc etc ad naseum\
+ The solution: make a quick, physical note of what needs improving, but don't lose your focus on the current problem at hand
 
- - Adding multiple event listeners
+- Adding multiple event listeners
  ```js
 $("li").on("click", e => {
   chooseAnswer(e, randomQuestion);
@@ -61,11 +68,12 @@ $("li").on("click", e => {
  ```js
 $("li").off();
  ```
- - Truly randomizing and using the .pop() method to 
+ - Truly randomizing and using the .pop() method to remove questions as the players are playing\
+ The solution: create a copy of the questions and answers array to reuse once the game is reset\
 
+ - CSS styling for most mobile devices found on Chrome DevTools. This took painstakingly slow incremental changes to see whether the game looked good or not. I've gained a lot more appreciation for CSS after reading through MDN docs now...
 
-
-#### Example Table
-| Column1 | Column 2 |
-| ------- | -------- |
-| yadda1  | yadda2   |
+## Conclusion
+Overall, this was a great opportunity to stretch my Front-End developer knowledge and gain experience with the common pitfalls of maintaining and organizing a real-world project. Before now, I've never appreciated the core tenets of KISS, staying organized and keeping the code as simple as possible while maintaining the desired output.\
+\
+After this project, I've got to say I'm more excited than ever to learn!
