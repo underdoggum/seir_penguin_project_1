@@ -56,7 +56,10 @@ This JavaScript-based, 2-player, turn-taking trivia game allows players to compe
 ## Challenges
 #### I had trouble with...
 - Noticing code that needs improvement, then noticing something else that should be improved, etc etc ad naseum\
- The solution: make a quick, physical note of what needs improving, but don't lose your focus on the current problem at hand
+ The solution: make a quick, physical note of what needs improving, but don't lose your focus on the current problem at hand.
+
+ - Making a complete product without knowing what features to implement, then adding on features which required me to spend several hours debugging and refactoring\
+ The solution: Next time, at the start of a project, have a full game-plan with all proposed features included so I can program to fit those features from the start, instead of Frankenstein-ing them in at the end.
 
 - Adding multiple event listeners
  ```js
@@ -75,5 +78,4 @@ $("li").off();
 
 ## Conclusion
 Overall, this was a great opportunity to stretch my Front-End developer knowledge and gain experience with the common pitfalls of maintaining and organizing a real-world project. Before now, I've never appreciated the core tenets of KISS, staying organized and keeping the code as simple as possible while maintaining the desired output.\
-\
 After this project, I've got to say I'm more excited than ever to learn!

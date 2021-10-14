@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 
 /* --------------- GLOBAL --------------- */
@@ -74,6 +75,13 @@ body {
 
 /* --------------- HEADING --------------- */
 
+span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2em;
+  display: inline-block;
+  padding: 10px;
+}
+
 #title {
   font-size: 1.5em;
   padding-bottom: 2%;
@@ -104,7 +112,6 @@ body {
   margin: 10px auto;
   text-align: center;
   padding: 3%;
-  /* box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.8); */
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -241,7 +248,7 @@ body {
   animation: pulsate 3s ease-out;
   animation-iteration-count: infinite; 
   opacity: 0.5;
-  border-radius: 40px;
+  border-radius: 15px;
   padding: 5px 15px;
 }
 
@@ -252,7 +259,7 @@ body {
   50% { 
       opacity: 1.0;
       transform: scale(1.125);
-      background-color: rgba(43, 36, 48, .75);
+      background-color: rgba(43, 36, 48, .5);
   }
   100% { 
       opacity: 0.5;
@@ -265,10 +272,9 @@ body {
 }
 
 
-/* --------------- MODAL --------------- */
+/* --------------- MODALS --------------- */
 
-#modal {
-  display: none;
+#modal, #modal-intro {
   background-color: rgba(0, 0, 0, .4);
   position: fixed;
   top: 0;
@@ -279,8 +285,29 @@ body {
   overflow: auto;
 }
 
-#modal-textbox {
-  background-color: white;
+#modal-intro {
+  display: block;
+  height: 100vh;
+}
+
+#modal {
+  display: none;
+}
+
+#close {
+  width: fit-content;
+  margin: 0 auto;
+  background-color: rgba(68, 84, 112, 0.2);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#close:hover {
+  cursor: pointer;
+}
+
+#modal-textbox, #modal-intro-textbox {
+  background-color: rgb(220, 220, 240);
   height: 150px;
   width: 80%;
   border-radius: 20px;
@@ -288,9 +315,20 @@ body {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
 }
 
-#close {
-  font-size: 1.5em;
-  text-decoration: none;
+#modal-intro-textbox {
+  height: 60%;
+  max-width: 800px;
+  max-height: 450px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 600px) {
+  #modal-intro-textbox {
+    margin-top: 150px;
+  }
 }
 
 @media (min-width: 600px) {

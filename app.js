@@ -140,7 +140,7 @@ const gameOver = () => {
 
   const $h2 = $("<h2>").addClass("gameover").css({
     "margin": "auto",
-    "background": "white",
+    "background": "inherit",
     "width": "fit-content",
   });
   const $h1 = $("<h1>").addClass("gameover").text("GAME OVER").css({
@@ -175,10 +175,16 @@ const handleModal = (questions) => {
 
 const URL = "https://cdn.contentful.com/spaces/fho9ut5q5jt4/environments/master/entries?access_token=AJoEH4OEk9QKtT_Je2t2k6G3CJM4_1v8vs4M71O1MfA&content_type=triviaq";
 
+
+
 $.ajax(URL)
   .then(data => {
     questions = data.items.map(q => q.fields);
     maxQuestions = questions.length;
     questionsCopy = [...questions];
-    setBoard(questions);
-  })
+
+    $("#close").on("click", () => {
+      $("#modal-intro").css("display", "none");
+      setBoard(questions);
+     });
+  });
