@@ -99,7 +99,7 @@ const setBoard = q => {
         $("#player2").addClass("winner");
         $("#player2 h3").text("Player 2 wins!");
       }
-      boardReset(q);
+      handleModal(q);
     }
   }
 }
@@ -162,14 +162,12 @@ const gameOver = q => {
     $h2.text("It's a draw!");
   }
   $("#modal-textbox").append($h1).append($h2);
-  
-  handleModal($h1, $h2, questions);
+  handleModal(questions);
 }
 
 const handleModal = (questions) => {
   $("#modal").css("display", "block");
   boardReset(questions);
-
 }
 
 
