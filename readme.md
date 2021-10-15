@@ -30,7 +30,7 @@ This JavaScript-based, 2-player, turn-taking trivia game allows players to compe
 3. Implement basic functionality of the game
 4. Add styling for mobile and desktop
 5. Clean up code
-6. Add extra features
+6. Add extra features, refactor js code and eliminate redundancies
 
 
 ## Timeline
@@ -39,7 +39,7 @@ This JavaScript-based, 2-player, turn-taking trivia game allows players to compe
  - Sign up for Vercel and host relevant GitHub repo linked to local git repo
  - Sign up for Contentful to host headless CMS for backend data-fetching
  - Creating Trivia questions/answers and loading them into Contentful database
- - Testing connection
+ - Testing local connection to Contentful
 
 #### Day 1:
  - Finished Minimum Viable Product of the game
@@ -50,11 +50,11 @@ This JavaScript-based, 2-player, turn-taking trivia game allows players to compe
 
  #### Day 3:
  - Fully functioning modal implemented at end of the game, appending the "game over" notification and reset button
- - Cleaning up code as much as possible to simplify future devs reading this
+ - Added a cheat code for Player 1 for those familiar with Konami gaming in the late 80's/90's
+ - Cleaning up code to simplify future devs reading this
 
 
 ## Challenges
-#### I had trouble with...
 - Noticing code that needs improvement, then noticing something else that should be improved, etc etc ad naseum\
  The solution: make a quick, physical note of what needs improving, but don't lose your focus on the current problem at hand.
 
@@ -78,4 +78,4 @@ $("li").off();
 
 ## Conclusion
 Overall, this was a great opportunity to stretch my Front-End developer knowledge and gain experience with the common pitfalls of maintaining and organizing a real-world project. Before now, I've never appreciated the core tenets of KISS, staying organized and keeping the code as simple as possible while maintaining the desired output.\
-After this project, I've got to say I'm more excited than ever to learn!
+After this project, and while knowing that my journey is long, I'm more excited than ever to learn!
